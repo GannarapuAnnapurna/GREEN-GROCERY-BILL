@@ -1,0 +1,84 @@
+#include <stdio.h>
+
+struct Customer {
+    int dd, mm, yyyy;
+    char name[20], city[20];
+    long long phone, cashier_id;
+};
+
+int main() {
+    struct Customer c;
+    float qty[40] = {0}, price[40] = {0};
+    int choice, item;
+    float totalVeg = 0, totalFruit = 0;
+
+    printf("Enter Cashier ID: ");
+    scanf("%lld", &c.cashier_id);
+
+    printf("Enter Date (dd/mm/yyyy): ");
+    scanf("%d/%d/%d", &c.dd, &c.mm, &c.yyyy);
+
+    printf("Enter Customer Name: ");
+    scanf("%s", c.name);
+
+    printf("Enter City: ");
+    scanf("%s", c.city);
+
+    printf("Enter Phone Number: ");
+    scanf("%lld", &c.phone);
+
+    do {
+        printf("\n--- MENU ---\n");
+        printf("1. Vegetables\n");
+        printf("2. Fruits\n");
+        printf("3. Exit & Generate Bill\n");
+        printf("Enter choice: ");
+        scanf("%d", &choice);
+
+        if (choice == 1) {
+            printf("\nVegetables:\n");
+            printf("1. Potato (Rs.20/kg)\n2. Tomato (Rs.45/kg)\n3. Cabbage (Rs.25/kg)\n");
+            printf("Enter item number: ");
+            scanf("%d", &item);
+            printf("Enter quantity (kg): ");
+            scanf("%f", &qty[item]);
+
+            if (item == 1) price[item] = qty[item] * 20;
+            if (item == 2) price[item] = qty[item] * 45;
+            if (item == 3) price[item] = qty[item] * 25;
+
+            totalVeg += price[item];
+            printf("Added successfully!\n");
+        }
+
+        else if (choice == 2) {
+            printf("\nFruits:\n");
+            printf("1. Apple (Rs.100/kg)\n2. Banana (Rs.50/kg)\n3. Mango (Rs.60/kg)\n");
+            printf("Enter item number: ");
+            scanf("%d", &item);
+            printf("Enter quantity (kg): ");
+            scanf("%f", &qty[item]);
+
+            if (item == 1) price[item] = qty[item] * 100;
+            if (item == 2) price[item] = qty[item] * 50;
+            if (item == 3) price[item] = qty[item] * 60;
+
+            totalFruit += price[item];
+            printf("Added successfully!\n");
+        }
+
+    } while (choice != 3);
+
+    printf("\n================ BILL =================\n");
+    printf("Customer: %s | City: %s | Phone: %lld\n", c.name, c.city, c.phone);
+    printf("Cashier ID: %lld | Date: %d-%d-%d\n", c.cashier_id, c.dd, c.mm, c.yyyy);
+    printf("--------------------------------------\n");
+    printf("Total Vegetables: Rs. %.2f\n", totalVeg);
+    printf("Total Fruits: Rs. %.2f\n", totalFruit);
+    printf("Tax: Rs. 2.50\n");
+    printf("Net Amount: Rs. %.2f\n", totalVeg + totalFruit + 2.5);
+    printf("======================================\n");
+    printf("Thank You! Visit Again 😊\n");
+
+    return 0;
+}
